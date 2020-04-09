@@ -1,3 +1,9 @@
+minetest.register_node("ws_water:coral_skeleton", {
+	description = "Coral Skeleton",
+	tiles = {"default_coral_skeleton.png"},
+	groups = {cracky = 3},
+	--sounds = default.node_sound_stone_defaults(),
+})
 
 minetest.register_node("ws_water:coral_green", {
 	description = "Green Coral",
@@ -26,7 +32,7 @@ minetest.register_node("ws_water:coral_green", {
 		local pos_above = pointed_thing.above
 
 		if minetest.get_node(pos_under).name ~= "ws_water:coral_skeleton" or
-				minetest.get_node(pos_above).name ~= "ws_water:water_source" then
+				minetest.get_node(pos_above).name ~= "ws_core:toxic_water_source" then
 			return itemstack
 		end
 
@@ -79,7 +85,7 @@ minetest.register_node("ws_water:coral_pink", {
 		local pos_above = pointed_thing.above
 
 		if minetest.get_node(pos_under).name ~= "ws_water:coral_skeleton" or
-				minetest.get_node(pos_above).name ~= "ws_water:water_source" then
+				minetest.get_node(pos_above).name ~= "ws_core:toxic_water_source" then
 			return itemstack
 		end
 
@@ -132,7 +138,7 @@ minetest.register_node("ws_water:coral_cyan", {
 		local pos_above = pointed_thing.above
 
 		if minetest.get_node(pos_under).name ~= "ws_water:coral_skeleton" or
-				minetest.get_node(pos_above).name ~= "ws_water:water_source" then
+				minetest.get_node(pos_above).name ~= "ws_core:toxic_water_source" then
 			return itemstack
 		end
 
@@ -159,23 +165,23 @@ minetest.register_node("ws_water:coral_cyan", {
 minetest.register_decoration({
     name = "ws_water:dead_corals",
     deco_type = "simple",
-    place_on = {"ws_core:dirt_dry"},
+    place_on = {"ws_core:dirt_dry","ws_core:clay_dirt","ws_core:sandy_dirt"},
     place_offset_y = -1,
-    sidelen = 4,
-    noise_params = {
-        offset = -4,
-        scale = 10,
-        spread = {x = 50, y = 50, z = 50},
-        seed = 7013,
-        octaves = 3,
-        persist = 0.7,
-    },
-    y_max = 0,
+    sidelen = 36,
+	noise_params = {
+		offset = 0.01,
+		scale = 0.008,
+		spread = {x = 10, y = 10, z = 10},
+		seed = 2,
+		octaves = 3,
+		persist = 0.6
+	},
+    y_max = -3,
     y_min = -50,
     flags = "force_placement",
-    spawn_by = "ws_core:toxic_water_source",
+    --spawn_by = "ws_core:toxic_water_source",
     decoration = {
-        "default:coral_green", "default:coral_pink",
-        "default:coral_cyan", "default:coral_skeleton",
+        "ws_water:coral_green", "ws_water:coral_pink",
+        "ws_water:coral_cyan", "ws_water:coral_skeleton",
     },
 })
